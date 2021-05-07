@@ -46,5 +46,17 @@ public class Sql2oDepartmentDao implements DepartmentDao {
         }
     }
 
+    @Override
+    public void update(int id, String name, String description, int numberOfEmployees) {
+        String sql = "UPDATE departments SET (name, description, numberofemployees) = (:name, :description, :numberOfEmployees) ";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("description", description)
+                    .addParameter("numberOfEmployees", numberOfEmployees)
+                    .executeUpdate();
+        }
+    }
+
 
 }
