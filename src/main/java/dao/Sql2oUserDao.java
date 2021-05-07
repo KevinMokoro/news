@@ -46,6 +46,17 @@ public class Sql2oUserDao implements UserDao {
         }
     }
 
+    public void update(int id, String name, String role, int departmentId) {
+        String sql = "UPDATE users SET (name, role, departmentid) = (:name, :role, :departmentId); ";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("role", role)
+                    .addParameter("departmentId", departmentId)
+                    .executeUpdate();
+        }
+    }
+
 
 
 }
