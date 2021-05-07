@@ -48,4 +48,8 @@ public class News {
     public int hashCode() {
         return Objects.hash(id, content, author);
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
