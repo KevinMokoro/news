@@ -66,7 +66,14 @@ public class Sql2oUserDao implements UserDao {
                     .executeUpdate();
         }
     }
-
+    @Override
+    public void clearAll() {
+        String sql = "DELETE FROM users;";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        }
+    }
 
 
 
