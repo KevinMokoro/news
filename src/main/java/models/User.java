@@ -15,9 +15,7 @@ public class User {
         this.departmentId = departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
-    }
+
 
     public int getId() {
         return id;
@@ -35,9 +33,7 @@ public class User {
         return departmentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     @Override
     public boolean equals(Object o) {
