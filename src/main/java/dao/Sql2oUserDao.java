@@ -47,7 +47,7 @@ public class Sql2oUserDao implements UserDao {
     }
 
     public void update(int id, String name, String role, int departmentId) {
-        String sql = "UPDATE users SET (name, role, departmentid) = (:name, :role, :departmentId); ";
+        String sql = "UPDATE user SET (name, role, departmentid) = (:name, :role, :departmentId); ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)
@@ -56,6 +56,19 @@ public class Sql2oUserDao implements UserDao {
                     .executeUpdate();
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE FROM users WHERE id = :id ;";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
+
+
+
 
 
 
