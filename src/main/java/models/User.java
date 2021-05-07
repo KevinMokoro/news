@@ -51,4 +51,7 @@ public class User {
         return Objects.hash(id, name, role, departmentId);
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
