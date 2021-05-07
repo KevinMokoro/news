@@ -10,7 +10,7 @@ public interface UserDao {
 
 
     List<User> getAll();
-    List<User> getAllUsersByDepartment(int departmentId);
+
     User findById(int id);
 
     void deleteById(int id);

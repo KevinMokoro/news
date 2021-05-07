@@ -12,11 +12,9 @@ public interface NewsDao {
 
 
     List<News> getAll();
-    List<News> getAllNewsByDepartment(int departmentId);
+
     News findById(int id);
 
-
-    void update(int id, String news, int departmentId);
 
 
     void deleteById(int id);
