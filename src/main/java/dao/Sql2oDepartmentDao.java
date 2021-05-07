@@ -58,5 +58,15 @@ public class Sql2oDepartmentDao implements DepartmentDao {
         }
     }
 
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE FROM departments WHERE id = :id ;";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
+
 
 }
