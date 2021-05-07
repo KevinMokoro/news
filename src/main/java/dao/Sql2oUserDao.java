@@ -4,6 +4,8 @@ package dao;
 import models.User;
 import org.sql2o.*;
 
+import java.util.List;
+
 
 public class Sql2oUserDao implements UserDao {
     private final Sql2o sql2o;
@@ -25,5 +27,14 @@ public class Sql2oUserDao implements UserDao {
             System.out.println(ex);
         }
     }
+    @Override
+    public List<User> getAll() {
+        String sql = "SELECT * FROM users;";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .executeAndFetch(User.class);
+        }
+    }
+
 
 }
