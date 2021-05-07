@@ -31,6 +31,10 @@ public class Department {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,4 +50,6 @@ public class Department {
     public int hashCode() {
         return Objects.hash(name, description, numberOfEmployees, id);
     }
+
+
 }
