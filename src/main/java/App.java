@@ -9,6 +9,11 @@ import dao.Sql2oUserDao;
 import org.sql2o.*;
 import models.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 
 public class App {
     public static void main(String[] args) {
@@ -73,6 +78,16 @@ public class App {
             } else{
                 return gson.toJson(userDao.getAll());
             }
+        });
+
+        get("/users/:id", "application/json", (req, res) -> {
+            int userId = Integer.parseInt(req.params("id"));
+            User userToFind = userDao.findById(userId);
+            Department department = departmentDao.findById(userToFind.getDepartmentId());
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("user", userToFind);
+            jsonMap.put("department", department);
+            return gson.toJson(jsonMap);
         });
 
 
