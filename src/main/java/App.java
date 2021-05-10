@@ -38,6 +38,10 @@ public class App {
             return gson.toJson(department);
         });
 
+        get("/departments", "application/json", (req, res) -> {
+            return gson.toJson(departmentDao.getAll());
+        });
+
 
 
     }
