@@ -119,6 +119,19 @@ public class App {
             }
         });
 
+        get("/departments/:id/news", "application/json", (req, res) -> {
+            int departmentId = Integer.parseInt(req.params("id"));
+            Department departmentToFind = departmentDao.findById(departmentId);
+            List <DepartmentNews> news = departmentDao.getAllNewsByDepartment(departmentToFind.getId());
+            if (departmentToFind == null ){
+                throw new ApiException(404, String.format("No department with id: %s exists", req.params("id")));
+            } else if(news.size() == 0) {
+                return "{\"message\":\"I'am sorry there are no news in this department currently.\"}";
+            } else {
+                 return gson.toJson(news);
+            }
+        });
+
 
 
 
