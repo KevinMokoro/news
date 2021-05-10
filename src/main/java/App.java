@@ -53,6 +53,21 @@ public class App {
             return gson.toJson(departmentToFind);
         });
 
+        post("/departments/:id/users/new", "application/json", (req, res) -> {
+            User user = gson.fromJson(req.body(), User.class);
+            int departmentId = Integer.parseInt(req.params("id"));
+            Department departmentToFind = departmentDao.findById(departmentId);
+            if (departmentToFind == null ){
+                throw new ApiException(404, String.format("No department with id: %s exists", req.params("id")));
+            } else {
+                user.setDepartmentId(departmentId);
+                userDao.add(user);
+                res.status(201);
+                return gson.toJson(user);
+            }
+        });
+
+
 
 
     }

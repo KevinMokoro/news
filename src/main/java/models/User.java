@@ -33,7 +33,9 @@ public class User {
         return departmentId;
     }
 
-
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
 
     @Override
     public boolean equals(Object o) {
