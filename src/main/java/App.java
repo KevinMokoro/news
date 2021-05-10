@@ -90,6 +90,14 @@ public class App {
             return gson.toJson(jsonMap);
         });
 
+        post("/news/new", "application/json", (req, res) -> {
+            News news = gson.fromJson(req.body(), News.class);
+            newsDao.add(news);
+            res.status(201);
+            return gson.toJson(news);
+        });
+
+
 
 
 
