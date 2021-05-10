@@ -30,5 +30,15 @@ public class App {
         conn = sql2o.open();
 
 
+
+        post("/departments/new", "application/json", (req, res) -> {
+            Department department = gson.fromJson(req.body(), Department.class);
+            departmentDao.add(department);
+            res.status(201);
+            return gson.toJson(department);
+        });
+
+
+
     }
 }
