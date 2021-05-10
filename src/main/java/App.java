@@ -97,6 +97,15 @@ public class App {
             return gson.toJson(news);
         });
 
+        get("/news", "application/json", (req, res) -> {
+            if (newsDao.getAll().size() == 0) {
+                return "{\"message\":\"I'm sorry, but no news are currently listed.\"}";
+            } else{
+                return gson.toJson(newsDao.getAll());
+            }
+        });
+
+
 
 
 
