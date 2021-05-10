@@ -67,6 +67,14 @@ public class App {
             }
         });
 
+        get("/users", "application/json", (req, res) -> {
+            if (userDao.getAll().size() == 0) {
+                return "{\"message\":\"I'm sorry, but no users are here yet.\"}";
+            } else{
+                return gson.toJson(userDao.getAll());
+            }
+        });
+
 
 
 
