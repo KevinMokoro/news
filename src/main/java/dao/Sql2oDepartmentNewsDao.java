@@ -2,6 +2,8 @@ package dao;
 import models.DepartmentNews;
 import org.sql2o.*;
 
+import java.util.List;
+
 public class Sql2oDepartmentNewsDao implements DepartmentNewsDao {
     private final Sql2o sql2o;
 
@@ -22,5 +24,17 @@ public class Sql2oDepartmentNewsDao implements DepartmentNewsDao {
             System.out.println(ex);
         }
     }
+
+    @Override
+    public List<DepartmentNews> getAll() {
+        String sql = "SELECT * FROM news WHERE type = :type;";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .throwOnMappingFailure(false)
+                    .addParameter("type", DepartmentNews.getDATABASETYPE())
+                    .executeAndFetch(DepartmentNews.class);
+        }
+    }
+
 
 }
