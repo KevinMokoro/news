@@ -105,6 +105,20 @@ public class App {
             }
         });
 
+        post("/departments/:id/news/new", "application/json", (req, res) -> {
+            int departmentId = Integer.parseInt(req.params("id"));
+            Department departmentToFind = departmentDao.findById(departmentId);
+            if (departmentToFind == null ){
+                throw new ApiException(404, String.format("No department with id: %s exists", req.params("id")));
+            } else {
+                DepartmentNews news = gson.fromJson(req.body(), DepartmentNews.class);
+                news.setDepartmentId(departmentId);
+                departmentNewsDao.add(news);
+                res.status(201);
+                return gson.toJson(news);
+            }
+        });
+
 
 
 
