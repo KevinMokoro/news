@@ -47,6 +47,18 @@ public class Sql2oDepartmentNewsDao implements DepartmentNewsDao {
         }
     }
 
+    @Override
+    public void update(int id, String content, String author, int departmentId) {
+        String sql = "UPDATE news SET (content, author, departmentid) = (:content, :author, :departmentId) ";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("content", content)
+                    .addParameter("author", author)
+                    .addParameter("departmentId", departmentId)
+                    .executeUpdate();
+        }
+    }
+
 
 
 }
