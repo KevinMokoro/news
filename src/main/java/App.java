@@ -132,6 +132,31 @@ public class App {
             }
         });
 
+        //this should allow us see users of a given department and link to their news(that department news)
+        get("/departments/:id/users/news", "application/json", (req, res) -> {
+            int departmentId = Integer.parseInt(req.params("id"));
+            Department departmentToFind = departmentDao.findById(departmentId);
+            if (departmentToFind == null ){
+                throw new ApiException(404, String.format("No department with id: %s exists", req.params("id")));
+            } else {
+                Map<String, Object> model = new HashMap<>();
+                List<User> users = departmentDao.getAllUsersByDepartment(departmentToFind.getId());
+                String news = String.format("/departments/%s/news", req.params("id"));
+                if (users.size() == 0) {
+                    String message = "I'm sorry, there are no users currently.";
+                    model.put("department", departmentToFind);
+                    model.put("message", message);
+                    model.put("departmentNews", news);
+                    return gson.toJson(model);
+                }else {
+                    model.put("department", departmentToFind);
+                    model.put("departmentUsers", users);
+                    model.put("departmentNews", news);
+                    return gson.toJson(model);
+                }
+            }
+        });
+
         exception(ApiException.class, (exception, req, res) -> {
             ApiException err = exception;
             Map<String, Object> jsonMap = new HashMap<>();
